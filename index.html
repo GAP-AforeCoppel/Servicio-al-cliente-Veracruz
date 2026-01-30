@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicio al cliente - Segmento Veracruz</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f4f6;
+        }
+        
+        .coppel-blue { color: #0056b3; }
+        .bg-coppel-blue { background-color: #0056b3; }
+        .coppel-yellow { color: #ffd200; }
+        .bg-coppel-yellow { background-color: #ffd200; }
+        
+        .script-box {
+            background-color: #ffffff;
+            border-left: 6px solid #0056b3;
+            transition: all 0.3s ease;
+        }
+
+        /* Estilo específico para el script de apertura */
+        .opening-box {
+            background-color: #ffffff;
+            border-left: 6px solid #ffd200; /* Amarillo para diferenciar apertura */
+        }
+
+        /* Estilo para script de no contacto */
+        .non-contact-box {
+            background-color: #fff1f2;
+            border-left: 6px solid #e11d48;
+        }
+
+        /* Estilo para script de éxito (Cierre 2) */
+        .success-box {
+            background-color: #f0fdf4;
+            border-left: 6px solid #16a34a;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+
+        /* Animación de flotación para el badge */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Animación para modales */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .obj-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Tabla comparativa */
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #e5e7eb;
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            vertical-align: middle;
+        }
+        .comparison-table th {
+            background-color: #f3f4f6;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #374151;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            text-align: left;
+        }
+        .comparison-table .highlight-coppel {
+            background-color: #eff6ff;
+            border-left: 4px solid #0056b3;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+        .comparison-table .competitor-col {
+            background-color: #fff1f2;
+            border-left: 4px solid #e11d48;
+            font-weight: 500;
+            color: #881337;
+        }
+
+        /* Scrollbar personalizado */
+        .custom-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden">
+
+    <!-- Header -->
+    <header class="bg-coppel-blue text-white p-4 shadow-lg flex justify-between items-center z-10">
+        <div class="flex items-center gap-3 w-full max-w-4xl">
+            <!-- LOGO COPPEL (PNG) -->
+            <div class="flex-shrink-0">
+                <img src="Coppel2 (3).png" alt="Coppel Logo" class="h-10 w-auto">
+            </div>
+            
+            <div class="overflow-hidden border-l border-blue-400 pl-3">
+                <h1 class="text-xl font-bold truncate">Servicio al cliente</h1>
+                <p class="text-sm text-yellow-300 leading-tight opacity-90 font-medium">
+                    Veracruz
+                </p>
+            </div>
+        </div>
+        <div class="flex gap-4 items-center flex-shrink-0">
+            <div class="text-right hidden md:block">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- Sidebar: Inputs -->
+        <aside class="w-full md:w-1/3 lg:w-3/12 bg-white border-r border-gray-200 p-4 flex flex-col gap-4 overflow-y-auto z-10 shadow-md custom-scroll">
+            
+            <div class="bg-yellow-50 border border-yellow-200 p-3 rounded-lg text-xs text-yellow-800 mb-2">
+                <i class="fa-solid fa-info-circle mr-1"></i>
+                <b>Instrucción:</b> Realice el saludo inicial (a la derecha). Cuando el cliente le diga el motivo, selecciónelo aquí abajo.
+            </div>
+
+            <!-- Selector Afore -->
+            <div>
+                <label class="block text-gray-700 text-xs font-bold mb-1 uppercase tracking-wide">
+                    1. ¿A qué Afore se va?
+                </label>
+                <div class="relative">
+                    <select id="competitorSelect" onchange="generateScript()" class="block appearance-none w-full bg-gray-50 border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-500 transition-colors cursor-pointer shadow-sm text-sm">
+                        <option value="" disabled selected>Seleccione la Afore...</option>
+                        <option value="profuturo">Profuturo</option>
+                        <option value="banorte">XXI Banorte</option>
+                        <option value="banamex">Citibanamex</option>
+                        <option value="inbursa">Inbursa</option>
+                        <option value="azteca">Azteca</option>
+                        <option value="sura">Sura</option>
+                        <option value="principal">Principal</option>
+                        <option value="invercap">InverCap</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Selector Motivo -->
+            <div>
+                <label class="block text-gray-700 text-xs font-bold mb-1 uppercase tracking-wide">
+                    2. ¿Cuál es el motivo?
+                </label>
+                <div class="grid grid-cols-1 gap-2">
+                    <!-- BOTÓN 1: SERVICIO -->
+                    <button onclick="setReason('service')" id="btn-service" class="reason-btn flex items-center p-3 border rounded-xl hover:bg-blue-50 transition-all text-left group focus:outline-none shadow-sm w-full">
+                        <div class="bg-blue-100 text-blue-600 rounded-full h-10 w-10 flex-shrink-0 flex items-center justify-center mr-3 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-headset text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm text-gray-800">Servicio</p>
+                            <p class="text-xs text-gray-500">Mala atención o procesos</p>
+                        </div>
+                    </button>
+
+                    <!-- BOTÓN 2: COBERTURA / HORARIOS -->
+                    <button onclick="setReason('coverage')" id="btn-coverage" class="reason-btn flex items-center p-3 border rounded-xl hover:bg-green-50 transition-all text-left group focus:outline-none shadow-sm w-full">
+                        <div class="bg-green-100 text-green-600 rounded-full h-10 w-10 flex-shrink-0 flex items-center justify-center mr-3 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-clock text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm text-gray-800">Cobertura / Horarios</p>
+                            <p class="text-xs text-gray-500">Ubicación, días y horarios</p>
+                        </div>
+                    </button>
+
+                    <!-- BOTÓN 3: RENDIMIENTOS -->
+                    <button onclick="setReason('returns')" id="btn-returns" class="reason-btn flex items-center p-3 border rounded-xl hover:bg-yellow-50 transition-all text-left group focus:outline-none shadow-sm w-full">
+                        <div class="bg-yellow-100 text-yellow-600 rounded-full h-10 w-10 flex-shrink-0 flex items-center justify-center mr-3 group-hover:bg-yellow-500 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-chart-line text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm text-gray-800">Rendimientos</p>
+                            <p class="text-xs text-gray-500">Busca ganar más dinero</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- COMPARATIVE DATA CARD (Dynamic) -->
+            <div id="data-card" class="hidden flex-1 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden flex flex-col mt-4">
+                <div class="bg-gray-100 p-2 border-b border-gray-200 flex justify-between items-center">
+                    <h4 class="font-bold text-xs text-gray-700 uppercase">VS. <span id="comp-name-display"></span></h4>
+                    <span class="text-[10px] bg-blue-100 text-blue-800 px-1 rounded">Veracruz</span>
+                </div>
+                <div id="comparison-content" class="p-0 overflow-y-auto text-xs">
+                    <!-- Dynamic Rows Go Here -->
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- Main Display: Generated Script -->
+        <main class="flex-1 p-4 md:p-8 bg-gray-100 flex flex-col justify-start items-center pt-8 relative overflow-y-auto">
+            
+            <!-- OPENING SCRIPT (Inicio de Llamada) -->
+            <div id="opening-script" class="w-full max-w-3xl fade-in">
+                
+                <div class="flex items-center justify-between mb-4 px-2">
+                    <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
+                        <i class="fa-solid fa-phone mr-1"></i> Fase 1: Apertura
+                    </span>
+                </div>
+
+                <div class="opening-box shadow-xl rounded-xl p-6 md:p-8 relative mb-6">
+                    <!-- Paso 1 -->
+                    <div class="mb-6 relative pl-4 border-l-2 border-gray-200">
+                        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-gray-300"></div>
+                        <h4 class="text-xs font-bold text-gray-400 uppercase mb-1 flex justify-between items-center">
+                            Paso 1: Saludo y Contacto
+                        </h4>
+                        <p class="text-lg text-gray-800 mb-3">
+                            "Hola, buen día, le hablo de Afore Coppel, soy <span class="font-bold text-blue-600">[Su Nombre]</span>. ¿Me podría comunicar, por favor, con <span class="font-bold text-blue-600">[Nombre del Trabajador]</span>?"
+                        </p>
+                        
+                        <!-- BOTONES DE CONTACTO NO EFECTIVO -->
+                        <div class="mt-3 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                            <p class="text-xs text-gray-500 font-bold uppercase mb-2">Si NO es el titular o no está:</p>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="showNonContact('wrong_number')" class="text-xs bg-red-50 text-red-600 border border-red-200 px-3 py-1.5 rounded hover:bg-red-100 transition-colors flex items-center font-medium">
+                                    <i class="fa-solid fa-user-slash mr-1.5"></i> No lo conozco / Equivocado
+                                </button>
+                                <button onclick="showNonContact('not_home')" class="text-xs bg-orange-50 text-orange-600 border border-orange-200 px-3 py-1.5 rounded hover:bg-orange-100 transition-colors flex items-center font-medium">
+                                    <i class="fa-regular fa-clock mr-1.5"></i> No se encuentra (Recado)
+                                </button>
+                                <button onclick="showNonContact('deceased')" class="text-xs bg-gray-100 text-gray-600 border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-200 transition-colors flex items-center font-medium">
+                                    <i class="fa-solid fa-ribbon mr-1.5"></i> Falleció
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paso 2 -->
+                    <div class="mb-6 relative pl-4 border-l-2 border-gray-200">
+                        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-gray-300"></div>
+                        <h4 class="text-xs font-bold text-gray-400 uppercase mb-1">Paso 2: Motivo de Llamada</h4>
+                        <p class="text-lg text-gray-800">
+                            "Mucho gusto <span class="font-bold text-blue-600">[Nombre]</span>, el motivo de mi llamada es porque hemos recibido su solicitud de cambio a <span class="font-bold text-red-500">[Nombre de Afore Competencia]</span>. ¿Sí lo solicitó usted?"
+                        </p>
+                        <p class="text-sm text-gray-500 italic mt-1 font-semibold">
+                            (Si dice "NO", generar registro en Salesforce. Si dice "SÍ", continuar 👇)
+                        </p>
+                    </div>
+
+                    <!-- Paso 3 -->
+                    <div class="relative pl-4 border-l-2 border-yellow-400">
+                        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-yellow-400 animate-pulse"></div>
+                        <h4 class="text-xs font-bold text-yellow-600 uppercase mb-1">Paso 3: Pregunta Clave (Sondeo)</h4>
+                        <p class="text-lg text-gray-900 font-medium">
+                            "Entiendo. Quiero mencionarle que valoramos mucho los años que ha confiado en Afore Coppel y es por ello que me gustaría saber: <br><br>
+                            <span class="bg-yellow-100 px-1 rounded">¿Cuál es la razón principal de su cambio?</span>"
+                        </p>
+                        <p class="text-sm text-gray-500 italic mt-2">
+                            👉 Escuche al cliente y <b>seleccione el motivo</b> en el menú de la izquierda para ver qué responder.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NON-CONTACT SCRIPT (Contacto No Efectivo) - Hidden by default -->
+            <div id="non-contact-script" class="hidden w-full max-w-3xl fade-in pb-20">
+                <!-- Back Button -->
+                <button onclick="resetApp()" class="mb-4 text-gray-500 hover:text-blue-600 flex items-center font-medium transition-colors group">
+                    <i class="fa-solid fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i>
+                    Regresar al Inicio
+                </button>
+
+                <div class="flex items-center justify-between mb-4 px-2">
+                    <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
+                        <i class="fa-solid fa-user-xmark mr-1"></i> Contacto No Efectivo
+                    </span>
+                </div>
+
+                <div class="non-contact-box shadow-xl rounded-xl p-6 md:p-8 relative mb-6">
+                    
+                    <!-- DYNAMIC NON-CONTACT CONTENT -->
+                    <div id="nc-content-area">
+                        <h4 id="nc-title" class="text-sm font-bold text-red-700 uppercase mb-3 flex items-center">
+                            <!-- JS Injected Title -->
+                        </h4>
+                        <p id="nc-text" class="text-gray-800 text-lg leading-relaxed mb-4">
+                            <!-- JS Injected Script -->
+                        </p>
+                        <div id="nc-extra" class="bg-red-50 p-3 rounded-lg text-sm text-red-800 mb-4 border border-red-100">
+                            <!-- JS Injected Extra Logic -->
+                        </div>
+                    </div>
+
+                    <!-- CIERRE 1 -->
+                    <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm mt-6">
+                        <h3 class="text-gray-500 font-bold text-xs uppercase mb-2">
+                            <i class="fa-solid fa-phone-slash mr-1"></i> Cierre 1 (Obligatorio)
+                        </h3>
+                        <p class="text-gray-800 font-medium italic">
+                            "Agradezco su atención, le llamó <span class="font-bold">[Su Nombre]</span> de Afore Coppel, ¡Que tenga un excelente día/tarde/noche!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RETENTION SCRIPT (Argumentación) - Hidden by default -->
+            <div id="script-container" class="hidden w-full max-w-3xl pb-20">
+                
+                <!-- Back Button -->
+                <button onclick="resetApp()" class="mb-4 text-gray-500 hover:text-blue-600 flex items-center font-medium transition-colors group">
+                    <i class="fa-solid fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i>
+                    Regresar al Saludo Inicial
+                </button>
+
+                <!-- Status Bar -->
+                <div class="flex items-center justify-between mb-4 px-2">
+                    <div class="flex gap-2">
+                        <span id="tag-competitor" class="bg-gray-700 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Vs. Competencia</span>
+                        <span id="tag-reason" class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Beneficio Clave</span>
+                    </div>
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
+                        <i class="fa-solid fa-shield-halved mr-1"></i> Fase 2: Retención
+                    </span>
+                </div>
+
+                <!-- The Script Box -->
+                <div class="script-box shadow-2xl rounded-xl p-6 md:p-8 relative mb-6">
+                    <button onclick="copyScript('script-body', 'script-closing')" class="absolute top-4 right-4 text-gray-300 hover:text-blue-600 transition-colors bg-gray-50 hover:bg-blue-50 p-2 rounded-full" title="Copiar guion">
+                        <i class="fa-regular fa-copy text-lg"></i>
+                    </button>
+
+                    <div class="mb-6">
+                        <h3 class="text-blue-600 font-bold text-xs uppercase mb-6 tracking-widest flex items-center">
+                             <i class="fa-solid fa-link mr-2"></i> Diálogo de Conexión
+                        </h3>
+                        <p id="script-body" class="text-gray-800 text-lg md:text-xl leading-relaxed font-medium font-sans">
+                            <!-- Script will be injected here -->
+                        </p>
+                        <p class="text-sm text-gray-500 italic mt-3 bg-gray-50 p-2 rounded border border-gray-100">
+                             <i class="fa-solid fa-info-circle mr-1"></i> Apóyese en los datos de la barra lateral (comparativa) para argumentar el beneficio.
+                        </p>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-yellow-50 to-white rounded-lg p-5 border border-yellow-200 shadow-inner">
+                        <h3 class="text-yellow-700 font-bold text-xs uppercase mb-2 flex items-center">
+                            <i class="fa-solid fa-handshake mr-2"></i> Cierre de Compromiso
+                        </h3>
+                        <p id="script-closing" class="text-gray-800 font-medium italic text-lg">
+                            <!-- Closing will be injected here -->
+                        </p>
+                    </div>
+                </div>
+
+                <!-- OBJECTION HANDLING SECTION -->
+                <div class="border-t-2 border-dashed border-gray-300 pt-6">
+                    <h3 class="text-center text-gray-500 font-bold text-sm uppercase mb-4 tracking-wider">
+                        🆘 Zona de Rescate: Si el cliente NO acepta a la primera
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button onclick="showRebuttal('money')" class="obj-btn bg-white border border-gray-200 p-3 rounded-lg text-left hover:border-green-500 transition-all flex items-center group">
+                            <div class="bg-green-100 text-green-600 h-8 w-8 rounded-full flex items-center justify-center mr-3 group-hover:bg-green-600 group-hover:text-white">
+                                <i class="fa-solid fa-sack-dollar"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-gray-500 uppercase">Objeción</p>
+                                <p class="text-sm font-bold text-gray-800">"Quiero más rendimiento"</p>
+                            </div>
+                        </button>
+
+                        <button onclick="showRebuttal('distance')" class="obj-btn bg-white border border-gray-200 p-3 rounded-lg text-left hover:border-blue-500 transition-all flex items-center group">
+                            <div class="bg-blue-100 text-blue-600 h-8 w-8 rounded-full flex items-center justify-center mr-3 group-hover:bg-blue-600 group-hover:text-white">
+                                <i class="fa-solid fa-car"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-gray-500 uppercase">Objeción</p>
+                                <p class="text-sm font-bold text-gray-800">"No me importa viajar"</p>
+                            </div>
+                        </button>
+
+                        <button onclick="showRebuttal('bad_service')" class="obj-btn bg-white border border-gray-200 p-3 rounded-lg text-left hover:border-red-500 transition-all flex items-center group">
+                            <div class="bg-red-100 text-red-600 h-8 w-8 rounded-full flex items-center justify-center mr-3 group-hover:bg-red-600 group-hover:text-white">
+                                <i class="fa-solid fa-thumbs-down"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-gray-500 uppercase">Objeción</p>
+                                <p class="text-sm font-bold text-gray-800">"Me atendieron mal"</p>
+                            </div>
+                        </button>
+
+                        <button onclick="showRebuttal('status_quo')" class="obj-btn bg-white border border-gray-200 p-3 rounded-lg text-left hover:border-purple-500 transition-all flex items-center group">
+                            <div class="bg-purple-100 text-purple-600 h-8 w-8 rounded-full flex items-center justify-center mr-3 group-hover:bg-purple-600 group-hover:text-white">
+                                <i class="fa-solid fa-clipboard-check"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-gray-500 uppercase">Objeción</p>
+                                <p class="text-sm font-bold text-gray-800">"Ya firmé / Qué pereza"</p>
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- Rebuttal Display -->
+                    <div id="rebuttal-display" class="hidden mt-4 bg-gray-800 text-white p-6 rounded-lg shadow-lg relative fade-in">
+                        <button onclick="closeRebuttal()" class="absolute top-2 right-2 text-gray-400 hover:text-white">
+                            <i class="fa-solid fa-times"></i>
+                        </button>
+                        
+                        <h4 class="text-yellow-400 font-bold text-xs uppercase mb-2">
+                            <i class="fa-solid fa-shield-cat mr-1"></i> Contra-Argumento
+                        </h4>
+                        
+                        <p id="rebuttal-text" class="text-lg font-medium leading-relaxed"></p>
+                        
+                        <div class="mt-4 pt-4 border-t border-gray-700 text-center">
+                            <p class="text-sm text-gray-400 italic mb-2">Cierre Sugerido:</p>
+                            <p class="text-yellow-300 font-bold" id="rebuttal-closing"></p>
+                        </div>
+
+                        <button onclick="closeRebuttal()" class="mt-4 w-full text-center text-xs text-gray-400 hover:text-white flex items-center justify-center gap-1 transition-colors">
+                             <i class="fa-solid fa-arrow-up"></i> Volver al Guion Principal
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons & Cancellation Process -->
+                <div class="mt-8 flex justify-center gap-4">
+                    <button onclick="resetApp()" class="px-6 py-3 bg-white border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 font-bold text-sm transition-colors shadow-sm">
+                        <i class="fa-solid fa-rotate-left mr-2"></i>Nueva Consulta
+                    </button>
+                    <!-- BOTÓN CANCELACIÓN NO EXITOSA (ROJO) -->
+                    <button onclick="registerFail()" class="px-6 py-3 bg-red-600 text-white rounded-lg font-bold text-sm transition-transform shadow-lg hover:bg-red-700 hover:-translate-y-0.5">
+                         <i class="fa-solid fa-thumbs-down mr-2"></i> Cancelación no exitosa
+                    </button>
+                    <!-- BOTÓN PROCESO DE CANCELACIÓN (VERDE) -->
+                    <button onclick="openCancelModal()" class="px-6 py-3 bg-green-600 text-white rounded-lg font-bold text-sm transition-transform shadow-lg hover:bg-green-700 hover:-translate-y-0.5">
+                         <i class="fa-solid fa-ban mr-2"></i> Proceso de Cancelación
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL TABLA COMPARATIVA -->
+    <div id="tableModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-6xl h-4/5 flex flex-col overflow-hidden animate-fade-in-up">
+            <div class="bg-coppel-blue text-white p-4 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-table"></i>
+                    <h2 class="text-lg font-bold">Tabla Comparativa - Veracruz</h2>
+                </div>
+                <div class="flex gap-2">
+                    <!-- Botón para ver todo si está filtrado -->
+                    <button id="showAllBtn" onclick="renderTable(null)" class="hidden bg-blue-700 text-white px-3 py-1 rounded text-xs hover:bg-blue-800 transition-colors">
+                        Ver Todos
+                    </button>
+                    <button onclick="toggleTableModal()" class="text-white hover:text-yellow-300 transition-colors">
+                        <i class="fa-solid fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-1 overflow-auto p-4 bg-gray-50">
+                <table class="w-full bg-white border-collapse comparison-table shadow-sm">
+                    <thead id="tableHead"></thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+            <div class="bg-gray-100 p-4 flex justify-end">
+                <button onclick="toggleTableModal()" class="bg-gray-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-gray-700 transition-colors">
+                    Cerrar Tabla
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PROCESO DE CANCELACIÓN (NUEVO) -->
+    <div id="cancelModal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden animate-fade-in-up relative">
+            
+            <!-- Header Modal -->
+            <div class="bg-red-600 text-white p-4 flex justify-between items-center">
+                <h2 class="text-lg font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-ban"></i> Proceso de Cancelación
+                </h2>
+                <button onclick="closeCancelModal()" class="text-white hover:text-red-200 transition-colors">
+                    <i class="fa-solid fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Body Modal -->
+            <div class="p-6">
+                <!-- Opciones (LISTA OCULTA HASTA SELECCIÓN, MOSTRADA POR DEFECTO EN JS) -->
+                <div id="cancel-menu-container">
+                    <p class="text-red-600 font-bold text-sm mb-4 animate-pulse">Recuerda recomendar primeramente la cancelación por la App o el Portal.</p>
+                    <div class="grid grid-cols-1 gap-3 mb-6">
+                        <button onclick="showCancelSteps('app')" class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                    <i class="fa-solid fa-mobile-screen"></i>
+                                </div>
+                                <div class="text-left">
+                                    <h3 class="font-bold text-gray-800">App Afore Móvil</h3>
+                                    <p class="text-xs text-gray-500">Autogestión rápida</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-blue-500"></i>
+                        </button>
+
+                        <button onclick="showCancelSteps('web')" class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-lg transition-all group">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                    <i class="fa-solid fa-globe"></i>
+                                </div>
+                                <div class="text-left">
+                                    <h3 class="font-bold text-gray-800">Afore Web</h3>
+                                    <p class="text-xs text-gray-500">Portal de internet</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-blue-500"></i>
+                        </button>
+
+                        <!-- MODIFICADO: Opacity-60 para indicar fallback -->
+                        <button onclick="showCancelSteps('module')" class="w-full flex items-center justify-between p-4 bg-gray-100 border border-gray-200 rounded-lg transition-all group opacity-60 hover:opacity-100 hover:bg-blue-50">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                    <i class="fa-solid fa-store"></i>
+                                </div>
+                                <div class="text-left">
+                                    <h3 class="font-bold text-gray-800">Módulo de Afore</h3>
+                                    <p class="text-xs text-gray-500">Atención presencial (Solo si falla digital)</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-blue-500"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step Display Area -->
+                <div id="cancel-steps-display" class="hidden bg-yellow-50 border border-yellow-200 rounded-lg p-4 animate-fade-in-up">
+                    <button onclick="goBackToCancelMenu()" class="mb-2 text-xs font-bold text-gray-500 hover:text-blue-600 flex items-center transition-colors">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Volver a opciones
+                    </button>
+                    <h4 id="cancel-step-title" class="font-bold text-yellow-800 mb-2 border-b border-yellow-200 pb-2"></h4>
+                    <div id="cancel-step-content" class="text-sm text-gray-700 leading-relaxed space-y-2"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS SCREEN (Cierre 2 - Retención Exitosa) -->
+    <div id="success-screen" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <!-- MODIFICADO: Layout horizontal rectangular -->
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl overflow-hidden animate-fade-in-up relative p-8">
+            
+            <button onclick="goBackFromSuccess()" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600 transition-colors z-10">
+                <i class="fa-solid fa-arrow-left text-xl"></i>
+            </button>
+
+            <div class="flex flex-col md:flex-row gap-8 items-stretch">
+                
+                <!-- COLUMNA IZQUIERDA: ICONO Y TÍTULO (Visuales) -->
+                <div class="w-full md:w-5/12 text-center flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-gray-100 pb-6 md:pb-0 md:pr-6">
+                    <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-green-100 text-green-600 mb-4 animate-float">
+                        <i class="fa-solid fa-check text-5xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">¡Retención Exitosa!</h2>
+                    <span class="inline-block bg-green-100 text-green-800 px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider shadow-sm mb-3">
+                        <i class="fa-solid fa-star mr-1"></i> Misión Cumplida
+                    </span>
+                    <p class="text-gray-500 text-sm">El cliente ha confirmado la cancelación.</p>
+                </div>
+
+                <!-- COLUMNA DERECHA: GUION DE CIERRE Y ACCIÓN -->
+                <div class="w-full md:w-7/12 flex flex-col justify-between">
+                    <div class="bg-green-50 rounded-lg p-5 border border-green-200 shadow-sm text-sm mb-4 flex-grow overflow-y-auto max-h-[300px] custom-scroll">
+                        <h3 class="text-green-700 font-bold text-xs uppercase mb-3 flex items-center">
+                            <i class="fa-solid fa-comment-dots mr-2"></i> Cierre 2 (Despedida)
+                        </h3>
+                        <div class="space-y-3 text-gray-800 leading-relaxed">
+                            <p>"Sr./Sra./Srita. <span class="font-bold text-blue-600">[Nombre del Cliente]</span>, agradezco su tiempo. ¡Ha tomado una excelente decisión!, nos encanta que siga confiando en Afore Coppel."</p>
+                            <p>"Le recuerdo que seguimos a su disposición en el <span class="font-bold">55-95-00-00-05</span> en toda la República, de lunes a sábado de 8:00am a 10:00pm en hora centro del país."</p>
+                            <p>"Por último, le comento que en Afore Coppel, sus datos están protegidos. Puede consultar nuestro aviso de privacidad en <b>www.aforecoppel.com</b>. Así mismo, le informamos que su llamada fue grabada para fines de calidad en el servicio."</p>
+                            <p>"De mi parte es un gusto haber conversado con usted, le llamo <span class="font-bold">[Su Nombre y Apellido]</span> de Afore Coppel que tenga excelente día/ tarde / noche."</p>
+                        </div>
+                    </div>
+
+                    <div class="text-right mt-2">
+                        <button onclick="resetApp()" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold text-sm shadow-md hover:bg-blue-700 transition-transform hover:-translate-y-0.5 flex items-center justify-center gap-2 ml-auto w-full md:w-auto">
+                            <i class="fa-solid fa-rotate-left"></i> Nueva Consulta
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- NO RETENTION SCREEN (Fail) -->
+    <div id="fail-screen" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <!-- MODIFICADO: Layout horizontal rectangular para match con Success -->
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl overflow-hidden animate-fade-in-up relative p-8">
+            
+            <!-- Botón de retroceso -->
+            <button onclick="goBackFromFail()" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600 transition-colors z-10">
+                <i class="fa-solid fa-arrow-left text-xl"></i>
+            </button>
+            <!-- BOTÓN DE CIERRE (X) ELIMINADO -->
+
+            <div class="flex flex-col md:flex-row gap-8 items-stretch">
+                
+                <!-- COLUMNA IZQUIERDA: ICONO Y TÍTULO (Visuales) -->
+                <div class="w-full md:w-5/12 text-center flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-gray-100 pb-6 md:pb-0 md:pr-6">
+                    <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-100 text-red-600 mb-4">
+                        <i class="fa-solid fa-times text-5xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Retención No Exitosa</h2>
+                    <p class="text-gray-500 mt-2 text-sm">El cliente ha decidido continuar con el traspaso.</p>
+                </div>
+
+                <!-- COLUMNA DERECHA: GUION Y ACCIÓN -->
+                <div class="w-full md:w-7/12 flex flex-col justify-between">
+                    <div class="bg-red-50 rounded-lg p-5 border border-red-200 shadow-sm text-sm mb-4 flex-grow">
+                        <h3 class="text-red-700 font-bold text-xs uppercase mb-3 flex items-center">
+                            <i class="fa-solid fa-comment-slash mr-2"></i> Despedida Institucional
+                        </h3>
+                        <div class="space-y-3 text-gray-800 leading-relaxed">
+                             <p>"Agradezco su atención. Si cambia de parecer le recuerdo que estamos disponibles para usted en el <span class="font-bold">55-95-00-00-05</span> en toda la República, de lunes a sábado de 8:00am a 10:00pm en hora centro del país."</p>
+                            <p>"Le atendió <span class="font-bold">[Su Nombre y Apellido]</span> de Afore Coppel, ¡Que tenga un excelente día/tarde/noche!"</p>
+                        </div>
+                    </div>
+
+                    <div class="text-right mt-2">
+                        <button onclick="resetApp()" class="bg-gray-600 text-white px-8 py-3 rounded-lg font-bold text-sm shadow-md hover:bg-gray-700 transition-transform hover:-translate-y-0.5 flex items-center justify-center gap-2 ml-auto w-full md:w-auto">
+                            <i class="fa-solid fa-rotate-left"></i> Finalizar y Reiniciar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- DATA MATRIX DE COMPARACIÓN ---
+        const comparisonMatrix = {
+            categories: [
+                { id: 'consar', label: 'Confianza (Monitor CONSAR)' }, // FIRST POSITION
+                { id: 'presence', label: 'Presencia en Veracruz' },
+                { id: 'wait', label: 'Espera SIN cita' },
+                { id: 'phone', label: 'Atención Telefónica' },
+                { id: 'days', label: 'Días de Atención' },
+                { id: 'time', label: 'Tiempo de Trámite' },
+                { id: 'inclusion', label: 'Inclusión' }
+            ],
+            coppel: {
+                presence: "44 módulos (Máxima cercanía)",
+                wait: "60 min máximo",
+                phone: "Humanos capacitados",
+                days: "Lunes a Domingo",
+                time: "Ágil: 30 min (75%)",
+                inclusion: "Prioridad adultos mayores",
+                consar: "2do lugar en monitor Afore"
+            },
+            competitors: {
+                profuturo: {
+                    presence: "4 módulos (Mínima)",
+                    wait: "120 min (2 horas)",
+                    phone: "IA no precisa",
+                    days: "Lunes a Sábado",
+                    time: "60 min",
+                    inclusion: "Prioridad adultos mayores",
+                    consar: "Menor calidad en el servicio"
+                },
+                banorte: {
+                    presence: "6 módulos (Limitada)",
+                    wait: "90 min",
+                    phone: "Estándar",
+                    days: "Lunes a Sábado",
+                    time: "Limitado a 40 min",
+                    inclusion: "General",
+                    consar: "Menor calidad en el servicio"
+                },
+                inbursa: {
+                    presence: "11 módulos",
+                    wait: "60 min",
+                    phone: "Estándar",
+                    days: "Lunes a Viernes",
+                    time: "Limitado a 40 min",
+                    inclusion: "General",
+                    consar: "Menor calidad en el servicio"
+                },
+                banamex: {
+                    presence: "9 módulos",
+                    wait: "90 min",
+                    phone: "Tardado",
+                    days: "Lunes a Viernes",
+                    time: "Limitado a 20 min",
+                    inclusion: "Prioridad adultos mayores",
+                    consar: "Menor calidad en el servicio"
+                },
+                azteca: {
+                    presence: "7 módulos",
+                    wait: "90 min",
+                    phone: "Estándar (Web)",
+                    days: "Lunes a Domingo",
+                    time: "55 min",
+                    inclusion: "Prioridad adultos mayores",
+                    consar: "Menor calidad en el servicio"
+                },
+                invercap: {
+                    presence: "5 módulos",
+                    wait: "90 min",
+                    phone: "Estándar",
+                    days: "Lunes a Viernes",
+                    time: "60 min",
+                    inclusion: "General",
+                    consar: "Menor calidad en el servicio"
+                },
+                sura: {
+                    presence: "6 módulos",
+                    wait: "90 min",
+                    phone: "-",
+                    days: "Lunes a Viernes",
+                    time: "60 min",
+                    inclusion: "Prioridad adultos mayores",
+                    consar: "Menor calidad en el servicio"
+                },
+                principal: {
+                    presence: "2 módulos",
+                    wait: "90 min",
+                    phone: "-",
+                    days: "L-J / V (Corta)",
+                    time: "20 min",
+                    inclusion: "General",
+                    consar: "Menor calidad en el servicio"
+                }
+            }
+        };
+
+        const competitorNames = {
+            profuturo: "Profuturo",
+            banorte: "XXI Banorte",
+            inbursa: "Inbursa",
+            banamex: "Banamex",
+            azteca: "Azteca",
+            invercap: "InverCap",
+            sura: "Sura",
+            principal: "Principal"
+        };
+
+        // --- GENERIC CONNECTION SCRIPTS ---
+        const competitorData = {
+            profuturo: { name: "Profuturo", modules: "4 módulos", weakness_desc: "Largas esperas y procesos digitales/robots." },
+            banorte: { name: "XXI Banorte", modules: "6 módulos", weakness_desc: "Horarios bancarios rígidos." },
+            banamex: { name: "Citibanamex", modules: "9 módulos", weakness_desc: "Atención limitada a 20 min y sin fines de semana." },
+            inbursa: { name: "Inbursa", modules: "11 módulos", weakness_desc: "No abre fines de semana." },
+            azteca: { name: "Azteca", modules: "7 módulos", weakness_desc: "Saturación alta." },
+            sura: { name: "Sura", modules: "6 módulos", weakness_desc: "Lejanía geográfica." },
+            principal: { name: "Principal", modules: "2 módulos", weakness_desc: "Cobertura mínima." },
+            invercap: { name: "InverCap", modules: "5 módulos", weakness_desc: "Cierre temprano (5 PM)." }
+        };
+
+        const connectionDialogues = {
+            service: "Entiendo perfectamente su situación, [Nombre], y lamento mucho la experiencia que tuvo. Le ofrezco una sincera disculpa a nombre de Afore Coppel. Mi intención es ayudarle a resolver esto. Antes de continuar con su solicitud, ¿me permite comentarle un beneficio clave que tenemos para usted?",
+            coverage: "Comprendo su decisión, la comodidad es fundamental. Sin embargo, me gustaría que valorara un dato importante sobre nuestra disponibilidad aquí en Veracruz comparada con otras opciones. ¿Me permite compartirle esta información?",
+            returns: "Entiendo que su prioridad es hacer crecer su dinero. Es una decisión financiera importante. Sin embargo, hay factores adicionales como los gastos de traslado que impactan su ahorro real. ¿Me permite explicarle cómo funciona esto en su beneficio?"
+        };
+
+        const rebuttals = {
+            money: {
+                text: "Comprendo que el número llama la atención. Pero le invito a ver el <b>'Rendimiento Neto'</b>. <br><br>Si la otra Afore le promete un poco más, pero usted gasta $200 en un solo viaje de taxi o camión para ir a verlos... <b>usted ya salió perdiendo</b>. <br><br>Aquí en Coppel, su dinero se queda íntegro porque no gasta en logística. <b>Proteja su ganancia real y no regale su dinero en transporte.</b>",
+                closing: "Deme el voto de confianza hoy. Le indico cómo cancelar desde su App ahora mismo y usted conserva su tranquilidad."
+            },
+            distance: {
+                text: "Entiendo que hoy, con calma, la distancia no le parezca grave. Pero piense en una <b>emergencia real</b>: <br><br>Si algún día necesita un retiro por desempleo urgente o un trámite médico, tener que viajar a otra ciudad se volverá un obstáculo enorme y estresante. <br><br>Hoy usted tiene un <b>'Seguro de Cercanía'</b> con nuestros 44 módulos. <b>No cancele su tranquilidad futura</b> por un trámite que puede anular hoy.",
+                closing: "¿Le parece bien si le guío para que cancele la solicitud en su celular y evitamos futuros dolores de cabeza?"
+            },
+            bad_service: {
+                text: "Le ofrezco una disculpa sincera y personal. Entiendo su molestia. <br><br>Pero le propongo algo: permítame levantar un reporte ahora mismo para corregirlo, pero <b>no castigue su propia comodidad</b> yéndose a un lugar con menos sucursales y peores horarios solo por un error nuestro. <br><br>Quédese con los beneficios de los 44 módulos y déjenos arreglar el servicio hoy mismo.",
+                closing: "Le invito a que cancelemos el cambio desde su App y yo me encargo personalmente de gestionar su reporte."
+            },
+            status_quo: {
+                text: "Lo entiendo, a veces da pereza hacer trámites. Pero véalo así: <br><br><b>Cancelar le toma 1 minuto en su celular hoy</b>. Cambiarse a una Afore con pocas sucursales le hará perder <b>horas enteras</b> en el futuro cada vez que necesite algo. <br><br>Invierta este minuto conmigo ahora para ahorrarse esas horas de filas y viajes en el futuro.",
+                closing: "¿Tiene su celular a la mano? Le voy diciendo los pasos para cancelar, es muy rápido."
+            }
+        };
+
+        const nonContactScenarios = {
+            wrong_number: {
+                title: "No lo conozco / Número Equivocado / No vive aquí",
+                script: "Una disculpa por las molestias, este número se proporcionó para poder localizar al Sr./Sra <span class='font-bold text-blue-600'>[Nombre del Titular]</span> ya que tenemos información que darle de Afore Coppel, <b>¿Tiene contacto con él/ella para poder dejar un recado con usted?</b>",
+                extra: "<b>Si dice NO:</b> Pasar a Cierre 1.<br><b>Si dice SÍ:</b> \"Por favor, coméntele que le llamamos de Afore Coppel para informarle que tenemos novedades importantes sobre su cuenta. Adicional, si le llegan a generar molestias las llamadas, le agradecería me apoye comentándole que es necesario que actualice sus datos con nosotros.\""
+            },
+            not_home: {
+                title: "No se encuentra (Dejar Recado)",
+                script: "Por favor, coméntele al Sr./Sra. <span class='font-bold text-blue-600'>[Nombre del Titular]</span> qué le llamamos de Afore Coppel para informarle que tenemos novedades importantes sobre su cuenta.",
+                extra: "Después de dejar el recado, proceda al <b>Cierre 1</b>."
+            },
+            deceased: {
+                title: "El trabajador falleció",
+                script: "Lamentamos mucho la pérdida del Sr./Srta. <span class='font-bold text-blue-600'>[Nombre del Titular]</span>.",
+                extra: "Muestre empatía, haga una pausa breve y proceda con respeto al <b>Cierre 1</b>."
+            }
+        };
+        
+        // --- DATA DE CANCELACIÓN ---
+        const cancellationSteps = {
+            app: {
+                title: "Pasos en App Afore Móvil",
+                steps: `
+                    <ol class="list-decimal list-inside space-y-2 text-sm text-gray-700">
+                        <li>Indique al cliente que abra su aplicación <b>AforeMóvil</b>.</li>
+                        <li>Debe ir al menú de <b>"Servicios"</b> (parte inferior).</li>
+                        <li>Seleccionar la opción <b>"Estatus de Traspaso"</b>.</li>
+                        <li>Verá su solicitud activa. Debe dar clic en <b>"Cancelar Solicitud"</b>.</li>
+                        <li>El sistema le pedirá confirmar con su contraseña o huella/rostro.</li>
+                        <li><b>Listo.</b> Le llegará un folio de cancelación por SMS/Correo.</li>
+                    </ol>
+                    <div class="mt-6 text-center">
+                        <button onclick="registerSuccess()" class="bg-green-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition-colors shadow-md">
+                            <i class="fa-solid fa-check-circle mr-2"></i> Cancelación Exitosa
+                        </button>
+                    </div>
+                `
+            },
+            web: {
+                title: "Pasos en Afore Web",
+                steps: `
+                    <ol class="list-decimal list-inside space-y-2 text-sm text-gray-700">
+                        <li>Indique al cliente que ingrese a <b>www.aforeweb.com.mx</b>.</li>
+                        <li>Debe iniciar sesión con su CURP y contraseña.</li>
+                        <li>Ir a la sección <b>"Mis Trámites"</b>.</li>
+                        <li>Buscar el apartado de <b>"Traspaso en proceso"</b>.</li>
+                        <li>Dar clic en el botón <b>"Cancelar Traspaso"</b> y confirmar.</li>
+                        <li>Se generará un comprobante de cancelación descargable.</li>
+                    </ol>
+                    <div class="mt-6 text-center">
+                        <button onclick="registerSuccess()" class="bg-green-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition-colors shadow-md">
+                            <i class="fa-solid fa-check-circle mr-2"></i> Cancelación Exitosa
+                        </button>
+                    </div>
+                `
+            },
+            module: {
+                title: "Pasos en Módulo de Afore (Orientar a sucursal mas cercana)",
+                steps: `
+                    <ul class="list-disc list-inside space-y-2 text-sm text-gray-700">
+                        <li>El cliente debe acudir personalmente a cualquier Módulo de Afore Coppel.</li>
+                        <li><b>Requisitos obligatorios:</b> Llevar su Identificación Oficial vigente (INE/Pasaporte).</li>
+                        <li>Solicitar al ejecutivo la <b>"Cancelación de Traspaso"</b>.</li>
+                        <li>El ejecutivo le entregará un formato impreso que deberá firmar.</li>
+                        <li>El trámite se procesa en el momento y se le entrega copia de su acuse.</li>
+                    </ul>
+                    <div class="mt-6 text-center">
+                        <button onclick="registerSuccess()" class="bg-green-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition-colors shadow-md">
+                            <i class="fa-solid fa-check-circle mr-2"></i> Cancelación Exitosa
+                        </button>
+                    </div>
+                `
+            }
+        };
+
+        let currentCompetitor = null;
+        let currentReason = null;
+
+        function setReason(reason) {
+            currentReason = reason;
+            
+            // UI Update
+            document.querySelectorAll('.reason-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-50', 'border-blue-500', 'ring-2', 'ring-blue-200');
+                btn.classList.add('border-gray-200');
+            });
+            
+            const selectedBtn = document.getElementById(`btn-${reason}`);
+            selectedBtn.classList.remove('border-gray-200');
+            selectedBtn.classList.add('bg-blue-50', 'border-blue-500', 'ring-2', 'ring-blue-200');
+
+            generateScript();
+        }
+
+        // GENERATE COMPARISON TABLE (DYNAMIC)
+        function updateComparisonTable(competitorKey) {
+            const card = document.getElementById('data-card');
+            const content = document.getElementById('comparison-content');
+            const nameDisplay = document.getElementById('comp-name-display');
+
+            if (!competitorKey || !competitorData[competitorKey]) {
+                card.classList.add('hidden');
+                return;
+            }
+
+            card.classList.remove('hidden');
+            nameDisplay.textContent = competitorNames[competitorKey];
+            
+            let html = '';
+            const compData = comparisonMatrix.competitors[competitorKey];
+            
+            comparisonMatrix.categories.forEach(cat => {
+                // If Inbursa is selected, skip the 'consar' row
+                if (competitorKey === 'inbursa' && cat.id === 'consar') return;
+
+                html += `
+                    <div class="border-b border-gray-100 p-2">
+                        <p class="font-bold text-gray-500 mb-1" style="font-size: 10px;">${cat.label.toUpperCase()}</p>
+                        <div class="flex justify-between items-start gap-2">
+                            <div class="w-1/2">
+                                <p class="text-red-700 font-medium">${compData[cat.id]}</p>
+                            </div>
+                            <div class="w-1/2 text-right">
+                                <p class="text-blue-700 font-bold">${comparisonMatrix.coppel[cat.id]}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            content.innerHTML = html;
+        }
+
+        function generateScript() {
+            const selectElement = document.getElementById('competitorSelect');
+            currentCompetitor = selectElement.value;
+
+            // Reset UI bits
+            closeRebuttal();
+            
+            // Update the side comparison table automatically
+            updateComparisonTable(currentCompetitor);
+
+            if (currentCompetitor && currentReason) {
+                // Logic for Script generation
+                document.getElementById('opening-script').classList.add('hidden');
+                document.getElementById('non-contact-script').classList.add('hidden');
+                document.getElementById('success-screen').classList.add('hidden');
+                document.getElementById('fail-screen').classList.add('hidden');
+                
+                const container = document.getElementById('script-container');
+                container.classList.remove('hidden');
+                container.classList.remove('fade-in');
+                void container.offsetWidth; 
+                container.classList.add('fade-in');
+
+                const data = competitorData[currentCompetitor];
+                document.getElementById('tag-competitor').textContent = `Vs. ${data.name}`;
+                
+                let reasonText = "";
+                if(currentReason === 'service') reasonText = "Servicio";
+                if(currentReason === 'coverage') reasonText = "Cobertura / Horarios";
+                if(currentReason === 'returns') reasonText = "Rendimientos";
+                document.getElementById('tag-reason').textContent = reasonText;
+
+                // USE GENERIC CONNECTION DIALOGUE INSTEAD OF SPECIFIC SCRIPT
+                let scriptContent = connectionDialogues[currentReason];
+                
+                document.getElementById('script-body').innerHTML = `"${scriptContent}"`;
+
+                let closingText = "Si ya le quedó clara la información, le invito a realizar la cancelación del trámite para conservar estos beneficios. ¿Le gustaría que le guíe paso a paso?";
+                if (currentReason === 'returns') {
+                    closingText = "Tomando en cuenta que aquí su ahorro es neto, le invito a realizar la cancelación del traspaso para evitar esos gastos hormiga. ¿Le parece bien si le guío paso a paso?";
+                } else if (currentReason === 'service') {
+                    closingText = "Para que siga disfrutando de la mejor atención sin horarios limitados, le invito a cancelar su solicitud de cambio ahora mismo. ¿Me permite indicarle cómo hacerlo?";
+                } else if (currentReason === 'coverage') {
+                    closingText = "Valore su tiempo y comodidad. Le invito a realizar la cancelación para seguir teniendo una sucursal siempre cerca. ¿Le ayudo a hacerlo desde su celular?";
+                }
+                document.getElementById('script-closing').textContent = closingText;
+            }
+        }
+
+        function showNonContact(scenarioType) {
+            // Ocultar Apertura
+            document.getElementById('opening-script').classList.add('hidden');
+            // Ocultar Script principal (si estuviera abierto)
+            document.getElementById('script-container').classList.add('hidden');
+            document.getElementById('success-screen').classList.add('hidden');
+            document.getElementById('fail-screen').classList.add('hidden');
+            
+            // Llenar contenido dinámico
+            const data = nonContactScenarios[scenarioType];
+            document.getElementById('nc-title').textContent = data.title;
+            document.getElementById('nc-text').innerHTML = `"${data.script}"`;
+            document.getElementById('nc-extra').innerHTML = data.extra;
+
+            // Mostrar No Contacto
+            const ncContainer = document.getElementById('non-contact-script');
+            ncContainer.classList.remove('hidden');
+            ncContainer.classList.remove('fade-in');
+            void ncContainer.offsetWidth; 
+            ncContainer.classList.add('fade-in');
+        }
+
+        function showRebuttal(type) {
+            const display = document.getElementById('rebuttal-display');
+            const text = document.getElementById('rebuttal-text');
+            const closing = document.getElementById('rebuttal-closing');
+            
+            display.classList.remove('hidden');
+            text.innerHTML = rebuttals[type].text;
+            closing.innerHTML = rebuttals[type].closing;
+            
+            // Scroll to rebuttal
+            display.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeRebuttal() {
+            document.getElementById('rebuttal-display').classList.add('hidden');
+        }
+
+        function copyScript(bodyId, closingId) {
+            let textToCopy = "";
+            if (bodyId && closingId) {
+                const body = document.getElementById(bodyId).innerText;
+                const closing = document.getElementById(closingId).innerText;
+                textToCopy = `${body}\n\n${closing}`;
+            }
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const btn = document.querySelector('button[title="Copiar guion"] i');
+                btn.classList.remove('fa-copy');
+                btn.classList.add('fa-check');
+                setTimeout(() => {
+                    btn.classList.remove('fa-check');
+                    btn.classList.add('fa-copy');
+                }, 1000);
+            });
+        }
+        
+        function openCancelModal() {
+            const modal = document.getElementById('cancelModal');
+            modal.classList.remove('hidden');
+            document.getElementById('cancel-menu-container').classList.remove('hidden');
+            document.getElementById('cancel-steps-display').classList.add('hidden');
+        }
+        
+        function closeCancelModal() {
+             document.getElementById('cancelModal').classList.add('hidden');
+        }
+        
+        function showCancelSteps(method) {
+            document.getElementById('cancel-menu-container').classList.add('hidden');
+            const display = document.getElementById('cancel-steps-display');
+            const title = document.getElementById('cancel-step-title');
+            const content = document.getElementById('cancel-step-content');
+            
+            const data = cancellationSteps[method];
+            title.textContent = data.title;
+            content.innerHTML = data.steps;
+            
+            display.classList.remove('hidden');
+            display.classList.remove('animate-fade-in-up');
+            void display.offsetWidth;
+            display.classList.add('animate-fade-in-up');
+        }
+        
+        function goBackToCancelMenu() {
+            document.getElementById('cancel-steps-display').classList.add('hidden');
+            document.getElementById('cancel-menu-container').classList.remove('hidden');
+        }
+
+        function registerSuccess() {
+            // Cierra el modal de cancelación
+            closeCancelModal();
+            
+            // Oculta las otras pantallas principales
+            document.getElementById('opening-script').classList.add('hidden');
+            document.getElementById('script-container').classList.add('hidden');
+            document.getElementById('non-contact-script').classList.add('hidden');
+            document.getElementById('fail-screen').classList.add('hidden');
+
+            // Muestra la pantalla de éxito (Cierre 2)
+            const successScreen = document.getElementById('success-screen');
+            successScreen.classList.remove('hidden');
+            successScreen.classList.remove('fade-in');
+            void successScreen.offsetWidth; 
+            successScreen.classList.add('fade-in');
+        }
+
+        function registerFail() {
+            // Cierra el modal de cancelación si estuviera abierto
+            closeCancelModal();
+            
+            // Oculta las otras pantallas principales
+            document.getElementById('opening-script').classList.add('hidden');
+            document.getElementById('script-container').classList.add('hidden');
+            document.getElementById('non-contact-script').classList.add('hidden');
+            document.getElementById('success-screen').classList.add('hidden');
+
+            // Muestra la pantalla de NO éxito
+            const failScreen = document.getElementById('fail-screen');
+            failScreen.classList.remove('hidden');
+            failScreen.classList.remove('fade-in');
+            void failScreen.offsetWidth; 
+            failScreen.classList.add('fade-in');
+        }
+        
+        function closeFailScreen() {
+             // Oculta la pantalla de fallo
+             document.getElementById('fail-screen').classList.add('hidden');
+        }
+        
+        function goBackFromFail() {
+            // Cierra la pantalla de fallo
+            document.getElementById('fail-screen').classList.add('hidden');
+            
+            // Restaura el contenedor de script (Fase 2: Retención)
+            const container = document.getElementById('script-container');
+            container.classList.remove('hidden');
+            // Reinicia la animación para que se vea fresco
+            container.classList.remove('fade-in');
+            void container.offsetWidth; 
+            container.classList.add('fade-in');
+        }
+        
+        function goBackFromSuccess() {
+            document.getElementById('success-screen').classList.add('hidden');
+            const modal = document.getElementById('cancelModal');
+            modal.classList.remove('hidden');
+        }
+
+        function resetApp() {
+            currentReason = null;
+            currentCompetitor = null;
+            document.getElementById('competitorSelect').selectedIndex = 0;
+            
+            document.querySelectorAll('.reason-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-50', 'border-blue-500', 'ring-2', 'ring-blue-200');
+                btn.classList.add('border-gray-200');
+            });
+            
+            document.getElementById('data-card').classList.add('hidden');
+            document.getElementById('script-container').classList.add('hidden');
+            document.getElementById('rebuttal-display').classList.add('hidden');
+            document.getElementById('non-contact-script').classList.add('hidden');
+            document.getElementById('success-screen').classList.add('hidden');
+            document.getElementById('fail-screen').classList.add('hidden');
+            
+            document.getElementById('opening-script').classList.remove('hidden');
+            document.getElementById('opening-script').classList.remove('fade-in');
+            void document.getElementById('opening-script').offsetWidth;
+            document.getElementById('opening-script').classList.add('fade-in');
+        }
+        
+        // Init
+        resetApp();
+    </script>
+</body>
+</html>
