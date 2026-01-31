@@ -604,12 +604,12 @@
                     <span class="inline-block bg-green-100 text-green-800 px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider shadow-sm mb-3">
                         <i class="fa-solid fa-star mr-1"></i> Misión Cumplida
                     </span>
-                    <p class="text-gray-500 text-sm">El cliente ha confirmado la cancelación.</p>
+                    <p class="text-gray-500 text-sm">El cliente ha confirmado la cancelación del traspaso.</p>
                 </div>
 
                 <!-- COLUMNA DERECHA: GUION DE CIERRE Y ACCIÓN -->
                 <div class="w-full md:w-7/12 flex flex-col justify-between">
-                    <div class="bg-green-50 rounded-lg p-5 border border-green-200 shadow-sm text-sm mb-4 flex-grow overflow-y-auto max-h-[300px] custom-scroll">
+                    <div class="bg-green-50 rounded-lg p-5 border border-green-200 shadow-sm text-sm mb-4 flex-grow">
                         <h3 class="text-green-700 font-bold text-xs uppercase mb-3 flex items-center">
                             <i class="fa-solid fa-comment-dots mr-2"></i> Cierre 2 (Despedida)
                         </h3>
@@ -683,14 +683,14 @@
             categories: [
                 { id: 'consar', label: 'Confianza (Monitor CONSAR)' }, // FIRST POSITION
                 { id: 'presence', label: 'Presencia en Veracruz' },
-                { id: 'wait', label: 'Espera SIN cita' },
+                { id: 'wait', label: 'Espera SIN cita' }, // <--- CHANGE LABEL
                 { id: 'phone', label: 'Atención Telefónica' },
                 { id: 'days', label: 'Días de Atención' },
-                { id: 'time', label: 'Tiempo de Trámite' },
+                { id: 'time', label: 'Atención con cita' }, // <--- CHANGED FROM 'Tiempo de Trámite'
                 { id: 'inclusion', label: 'Inclusión' }
             ],
             coppel: {
-                presence: "44 módulos (Máxima cercanía)",
+                presence: "31 tiendas con Asesor previsional y 21 modulos de auto servicio",
                 wait: "60 min máximo",
                 phone: "Humanos capacitados",
                 days: "Lunes a Domingo",
@@ -809,11 +809,11 @@
                 closing: "Deme el voto de confianza hoy. Le indico cómo cancelar desde su App ahora mismo y usted conserva su tranquilidad."
             },
             distance: {
-                text: "Entiendo que hoy, con calma, la distancia no le parezca grave. Pero piense en una <b>emergencia real</b>: <br><br>Si algún día necesita un retiro por desempleo urgente o un trámite médico, tener que viajar a otra ciudad se volverá un obstáculo enorme y estresante. <br><br>Hoy usted tiene un <b>'Seguro de Cercanía'</b> con nuestros 44 módulos. <b>No cancele su tranquilidad futura</b> por un trámite que puede anular hoy.",
+                text: "Entiendo que hoy, con calma, la distancia no le parezca grave. Pero piense en una <b>emergencia real</b>: <br><br>Si algún día necesita un retiro por desempleo urgente o un trámite médico, tener que viajar a otra ciudad se volverá un obstáculo enorme y estresante. <br><br>Hoy usted tiene un <b>'Seguro de Cercanía'</b> con nuestros 31 tiendas con Asesor Previsional y 21 módulos de Auto Servicio. <b>No cancele su tranquilidad futura</b> por un trámite que puede anular hoy.",
                 closing: "¿Le parece bien si le guío para que cancele la solicitud en su celular y evitamos futuros dolores de cabeza?"
             },
             bad_service: {
-                text: "Le ofrezco una disculpa sincera y personal. Entiendo su molestia. <br><br>Pero le propongo algo: permítame levantar un reporte ahora mismo para corregirlo, pero <b>no castigue su propia comodidad</b> yéndose a un lugar con menos sucursales y peores horarios solo por un error nuestro. <br><br>Quédese con los beneficios de los 44 módulos y déjenos arreglar el servicio hoy mismo.",
+                text: "Le ofrezco una disculpa sincera y personal. Entiendo su molestia. <br><br>Pero le propongo algo: permítame levantar un reporte ahora mismo para corregirlo, pero <b>no castigue su propia comodidad</b> yéndose a un lugar con menos sucursales y peores horarios solo por un error nuestro. <br><br>Quédese con los beneficios de los 31 tiendas con Asesor Previsional y 21 módulos de Auto Servicio y déjenos arreglar el servicio hoy mismo.",
                 closing: "Le invito a que cancelemos el cambio desde su App y yo me encargo personalmente de gestionar su reporte."
             },
             status_quo: {
@@ -1158,6 +1158,7 @@
             currentCompetitor = null;
             document.getElementById('competitorSelect').selectedIndex = 0;
             
+            // Reset UI buttons
             document.querySelectorAll('.reason-btn').forEach(btn => {
                 btn.classList.remove('bg-blue-50', 'border-blue-500', 'ring-2', 'ring-blue-200');
                 btn.classList.add('border-gray-200');
