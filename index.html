@@ -279,9 +279,13 @@
                         <p class="text-lg text-gray-800">
                             "Mucho gusto <span class="font-bold text-blue-600">[Nombre]</span>, el motivo de mi llamada es porque hemos recibido su solicitud de cambio a <span class="font-bold text-red-500">[Nombre de Afore Competencia]</span>. ¿Sí lo solicitó usted?"
                         </p>
-                        <p class="text-sm text-gray-500 italic mt-1 font-semibold">
-                            (Si dice "NO", generar registro en Salesforce. Si dice "SÍ", continuar 👇)
+                        <p class="text-sm text-gray-500 italic mt-1 font-semibold mb-3">
+                            (Si dice "NO", generar registro en Salesforce y ofrecer el proceso de cancelación👇. Si dice "SÍ", continuar con el PASO 3)
                         </p>
+                        <!-- BOTÓN DUPLICADO PROCESO DE CANCELACIÓN -->
+                        <button onclick="openCancelModal()" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg font-bold text-xs transition-transform shadow-md hover:bg-green-700 hover:-translate-y-0.5">
+                             <i class="fa-solid fa-ban mr-2"></i> Proceso de Cancelación
+                        </button>
                     </div>
 
                     <!-- Paso 3 -->
